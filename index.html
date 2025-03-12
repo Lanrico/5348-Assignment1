@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
    <meta charset="utf-8">
    <title>COMP5347 Assignment One</title>
    <link rel="stylesheet" href="index.css" />
    <script type="text/javascript" src="index.js"></script>
 </head>
+
 <body>
-   <form method="get" action="">
-      <div id="searchBox">
-      
+   <div id="header">
+      <div id="header-header">
+         <button id="lightModeButton" onclick="lightMode()">Light Mode</button>
+         <button id="darkModeButton" onclick="darkMode()">Dark Mode</button>
       </div>
-      <div id="listBox">
-      
-      </div>   
-   </form>
+      <div id="header-top">
+         <h1>Book Store</h1>
+      </div>
+      <div id="header-bottom">
+         <div id="header-left">
+            <input type="text" id="searchInput" placeholder="Search for a book">
+            <button id="searchButton" onclick="searchBooks()">Search</button>
+            <div id="filterOptions">
+               <select id="categoryFilter">
+                  <option value="">All Categories</option>
+                  <option value="Art">Art</option>
+                  <option value="Action and Adventure">Action and Adventure</option>
+                  <option value="Science Fiction">Science Fiction</option>
+                  <option value="Science History">Science History</option>
+                  <option value="Health">Health</option>
+                  <option value="Advanture">Advanture</option>
+               </select>
+            </div>
+            <button id="filterButton" onclick="filterBooks()">Filter</button>
+            <button id="clearButton" onclick="clearFilters()">Clear Filters</button>
+         </div>
+         <div id="header-right">
+            <button id="addToCartButton" onclick="addToCart()">Add to Cart</button>
+            <div id="addNumber">
+               <input type="number" id="addNumberInput" placeholder="1">
+               <button id="addNumberConfirmButton" onclick="addNumberConfirm()">Confirm</button>
+               <button id="addNumberCancelButton" onclick="addNumberCancel()">Cancel</button>
+            </div>
+            <button id="resetCartButton">Reset Cart</button>
+            <div id="cartButton">
+               <img id="cartIcon" src="images/shopping_cart.png" alt="Cart">
+               <div id="cartCount">(<span id="cartCountNumber">0</span>)</div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div id="listBox">
+      <table id="bookTable">
+      </table>
+   </div>
 </body>
+
 </html>

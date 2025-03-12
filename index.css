@@ -8,18 +8,120 @@ body {
    font-size: 80%;
 }
 
-div#searchBox, div#listBox {
+div#header-top {
+   text-align: center;
+}
+
+
+
+div#header-bottom {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+}
+
+div#header-right {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 0.5em;
+}
+
+div#header, div#listBox {
    margin: 0.25em auto;
-   background-color: #EBF4FB;
+   background-color: #f0fefd;
    padding: 1em;
-   border: 1pt solid #95BEF0;
+   border: 1pt solid #3accc0;
    width: 80%;
 }
-div#searchBox { margin-top: 1em; }
-div#listBox { 
-   margin-top: 1em; 
+
+/* div#listBox {
+   background-color: white;
+   padding-top: 0;
+} */
+
+div#header-left { 
    background-color: #FAFCFF;
-   }
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 0.5em;
+}
+
+button {
+   padding: 0.2em 0.7em;
+   border: 1pt solid #3accc0;
+   border-radius: 5px;
+   background-color: #3accc0;
+   color: white;
+   cursor: pointer;
+}
+
+button:hover {
+   border: 1pt solid #ff1688;
+   background-color: #FAFCFF;
+   color: #ff1688;
+}
+
+#bookTable {
+   width: 100%;
+   border-collapse: collapse;
+   border-spacing: 1;
+}
+
+#bookTableHeader {
+   background-color: #e2fffd ;
+}
+
+#cartIcon {
+   width: 20px;
+   height: 20px;
+}
+
+#cartButton {
+   padding: 0.2em 0.7em;
+   border: 1pt solid #3accc0;
+   border-radius: 5px;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   background-color: #e2fffd;
+   color: #000000;
+}
+
+#cartButton:hover {
+   background-color: #e2fffd;
+   color: #ff1688;
+   border: 1pt solid #ff1688;
+}
+
+input {
+   padding: 0.2em 0.7em;
+   border: 1pt solid #3accc0;
+   border-radius: 5px;
+   background-color: #FAFCFF;
+}
+
+input:focus {
+   outline: none;
+   border: 1pt solid #ff1688;
+}
+
+
+select {
+   padding: 0.2em 0.7em;
+   border: 1pt solid #3accc0;
+   border-radius: 5px;
+   background-color: #FAFCFF;
+   color: #000000;
+}
+
+select:focus {
+   outline: none;
+   border: 1pt solid #ff1688;
+}
+
 
 table {
    border: collapse; 
@@ -46,9 +148,90 @@ table tbody td:first-child  {
    padding: 0.5em 0em;   
 }
 
+tr{
+   /* background-color: white; */
+}
+
+th{
+   text-align: center;
+   font-size: 1.2em;
+}
+
+td{
+   text-align: center;
+}
+
 caption {
    background-color: #95BEF0;
       padding: 0.5em 0.5em; 
       font-weight: bold;
       font-size: 1.2em;
 }
+
+.titleField{
+   text-align: left;
+}
+
+.checkboxField{
+   padding: 0.5em;
+}
+
+.checkbox {
+   width: 1em;
+   height: 1em;
+   border: 1pt solid #3accc0;
+   border-radius: 5px;
+   margin: 1em;
+}
+
+.checkbox:checked {
+   background-color: #3accc0;
+}
+
+img {
+   width: 100px;
+   height: 150px;
+}
+.coverField{
+   padding: 0.5em;
+   width: 100px;
+   padding-left: 0;
+}
+
+.ratingField{
+   padding: 0.5em;
+   width: 100px;
+}
+
+.star {
+   width: 15px;
+   height: 15px;
+   background-color: #3accc0;
+}
+#addNumber{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 0.5em;
+   display: none;
+}
+
+#addNumberInput{
+   width: 3em;
+}
+
+#header-header{
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   gap: 0;
+}
+
+#lightModeButton{
+   display: none;
+}
+
+#darkModeButton{
+   display: flex;
+}
+
