@@ -29,6 +29,8 @@ getJsonObject('data.json',
   function (xhr) { console.error(xhr); }
 );
 
+
+
 // add event listener to search button
 function searchBooks() {
   searchContent = document.getElementById('searchInput').value;
@@ -267,3 +269,17 @@ function lightMode() {
   lightModeButton.style.display = 'none';
 }
 
+// Add event listener to each button
+function addEventListeners() {
+  console.log(document.getElementById('searchButton'));
+  document.getElementById('searchButton').addEventListener('click', searchBooks);
+  document.getElementById('filterButton').addEventListener('click', filterBooks);
+  document.getElementById('clearButton').addEventListener('click', clearFilters);
+  document.getElementById('addToCartButton').addEventListener('click', addToCart);
+  document.getElementById('addNumberConfirmButton').addEventListener('click', addNumberConfirm);
+  document.getElementById('addNumberCancelButton').addEventListener('click', addNumberCancel);
+  document.getElementById('resetCartButton').addEventListener('click', resetCart);
+  document.getElementById('darkModeButton').addEventListener('click', darkMode);
+  document.getElementById('lightModeButton').addEventListener('click', lightMode);
+}
+window.onload = addEventListeners;

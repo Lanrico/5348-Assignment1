@@ -11,8 +11,8 @@
 <body>
    <div id="header">
       <div id="header-header">
-         <button id="lightModeButton" onclick="lightMode()">Light Mode</button>
-         <button id="darkModeButton" onclick="darkMode()">Dark Mode</button>
+         <button id="lightModeButton">Light Mode</button>
+         <button id="darkModeButton">Dark Mode</button>
       </div>
       <div id="header-top">
          <h1>B2YBooks</h1>
@@ -20,7 +20,7 @@
       <div id="header-bottom">
          <div id="header-left">
             <input type="search" id="searchInput" placeholder="Search for a book">
-            <button id="searchButton" onclick="searchBooks()">Search</button>
+            <button id="searchButton">Search</button>
             <div id="filterOptions">
                <select id="categoryFilter">
                   <option value="">All Categories</option>
@@ -32,17 +32,17 @@
                   <option value="Advanture">Advanture</option>
                </select>
             </div>
-            <button id="filterButton" onclick="filterBooks()">Filter</button>
-            <button id="clearButton" onclick="clearFilters()">Clear Filters</button>
+            <button id="filterButton">Filter</button>
+            <button id="clearButton">Clear Filters</button>
          </div>
          <div id="header-right">
-            <button id="addToCartButton" onclick="addToCart()">Add to Cart</button>
+            <button id="addToCartButton">Add to Cart</button>
             <div id="addNumber">
                <input type="number" id="addNumberInput" placeholder="1">
-               <button id="addNumberConfirmButton" onclick="addNumberConfirm()">Confirm</button>
-               <button id="addNumberCancelButton" onclick="addNumberCancel()">Cancel</button>
+               <button id="addNumberConfirmButton">Confirm</button>
+               <button id="addNumberCancelButton">Cancel</button>
             </div>
-            <button id="resetCartButton" onclick="resetCart()">Reset Cart</button>
+            <button id="resetCartButton">Reset Cart</button>
             <div id="cartButton">
                <img id="cartIcon" src="images/shopping_cart.png" alt="Cart">
                <div id="cartCount">(<span id="cartCountNumber">0</span>)</div>
