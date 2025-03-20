@@ -15,11 +15,11 @@
          <button id="darkModeButton" onclick="darkMode()">Dark Mode</button>
       </div>
       <div id="header-top">
-         <h1>Book Store</h1>
+         <h1>B2YBooks</h1>
       </div>
       <div id="header-bottom">
          <div id="header-left">
-            <input type="text" id="searchInput" placeholder="Search for a book">
+            <input type="search" id="searchInput" placeholder="Search for a book">
             <button id="searchButton" onclick="searchBooks()">Search</button>
             <div id="filterOptions">
                <select id="categoryFilter">
@@ -42,7 +42,7 @@
                <button id="addNumberConfirmButton" onclick="addNumberConfirm()">Confirm</button>
                <button id="addNumberCancelButton" onclick="addNumberCancel()">Cancel</button>
             </div>
-            <button id="resetCartButton">Reset Cart</button>
+            <button id="resetCartButton" onclick="resetCart()">Reset Cart</button>
             <div id="cartButton">
                <img id="cartIcon" src="images/shopping_cart.png" alt="Cart">
                <div id="cartCount">(<span id="cartCountNumber">0</span>)</div>

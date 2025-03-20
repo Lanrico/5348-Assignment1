@@ -1,3 +1,4 @@
+// fetch data from data.json
 function getJsonObject(path, success, error) {
   var xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
@@ -14,52 +15,82 @@ function getJsonObject(path, success, error) {
 }
 
 var characterList = []; // character list container
-var selectedBook = null;
-var isDarkMode = false;
+var selectedBook = null; // selected book
+var isDarkMode = false;  // dark mode flag
+var searchContent = '';  // search content
+var categoryFilter = '';  // category filter
+
+// store the character list into characterList
 getJsonObject('data.json',
   function (data) {
-    characterList = data; // store the character list into characterList
+    characterList = data;
     loadTable(characterList);
   },
   function (xhr) { console.error(xhr); }
 );
 
+// add event listener to search button
 function searchBooks() {
-  const searchInput = document.getElementById('searchInput').value;
-  console.log(searchInput);
+  searchContent = document.getElementById('searchInput').value;
+  console.log(searchContent);
+
+  // If search content is empty, give an alert to the user
+  let c = characterList.filter(book =>
+    (!categoryFilter || book.category === categoryFilter) && book.title.toLowerCase().includes(searchContent.toLowerCase())
+  );
+  console.log(c);
+  if (c.length == 0) {
+    alert('No books found with this title');
+  }
+
+  // searchBooks calls filterBooks to make sure the search result is consistent with the category filter
   filterBooks();
 }
 
+
+// add event listener to category filter
 function filterBooks() {
-  const searchInput = document.getElementById('searchInput').value;
-  if (document.getElementById('categoryFilter').value === '') {
-    loadTable(characterList, searchInput);
+  categoryFilter = document.getElementById('categoryFilter').value;
+  if (categoryFilter === '') {
+    loadTable(characterList);
   } else {
-    const categoryFilter = document.getElementById('categoryFilter').value;
     console.log(categoryFilter);
+
+    // If no books are found in the category, give an alert to the user
     let characterListNew = characterList.filter(book => book.category === categoryFilter);
-    loadTable(characterListNew, searchInput);
+    console.log(characterListNew);
+    if (characterListNew.length == 0) {
+      alert('No books found in this category');
+    }
+    loadTable(characterListNew);
   }
 }
 
+// add event listener to clear category filter button
 function clearFilters() {
-  const searchInput = document.getElementById('searchInput').value;
   document.getElementById('categoryFilter').value = '';
-  loadTable(characterList, searchInput);
+  categoryFilter = '';
+  loadTable(characterList);
 }
 
-function loadTable(characterList, searchInput) {
+// Integrated table load function
+function loadTable(characterList) {
+  // Initialize the table header
   const bookTable = document.getElementById('bookTable');
   bookTable.innerHTML = '';
   insertTableHeader(bookTable);
+
+  // Insert each book into the table
   characterList.map(book => {
     let index = characterList.indexOf(book);
     let newRow = bookTable.insertRow();
 
     insertBook(book, index, newRow);
-    if (searchInput && book.title.toLowerCase().includes(searchInput.toLowerCase())) {
+    // If the search content is not empty, highlight the search content in the table
+    if (searchContent && book.title.toLowerCase().includes(searchContent.toLowerCase())) {
       newRow.style.border = '1pt solid #ff1688';
       newRow.style.backgroundColor = '#ffe8f3';
+      newRow.style.color = 'black';
     }
   });
 }
@@ -81,7 +112,7 @@ function insertTableHeader(bookTable) {
 }
 
 function insertBook(book, index, newRow) {
-
+  // Create the html elements for each row of books
   const checkboxCell = newRow.insertCell();
   const coverCell = newRow.insertCell(1);
   const titleCell = newRow.insertCell(2);
@@ -115,6 +146,7 @@ function insertBook(book, index, newRow) {
   publisherCell.innerHTML = `${book.publisher}`;
   categoryCell.innerHTML = `${book.category}`;
 
+  // Create the rating stars, and fill in the stars based on the rating
   for (let i = 0; i < book.rating; i++) {
     ratingCell.innerHTML += `<img src="images/star-16.ico" class="star" alt="Star Rating">`;
   }
@@ -123,6 +155,7 @@ function insertBook(book, index, newRow) {
     ratingCell.innerHTML += `<img src="images/outline-star-16.ico" class="star outline" alt="Star Rating">`;
   }
 
+  // Add event listener to each checkbox
   checkbox.addEventListener('click', () => {
     if (checkbox.checked) {
       resetAllCheckbox();
@@ -136,6 +169,7 @@ function insertBook(book, index, newRow) {
   });
 }
 
+// Add event listener to the add to cart button
 function addToCart() {
   if (selectedBook) {
     console.log(selectedBook);
@@ -148,18 +182,23 @@ function addToCart() {
   }
 }
 
+// Add event listener to the add number confirm button
 function addNumberConfirm() {
   const addNumberInput = document.getElementById('addNumberInput').value;
   console.log(addNumberInput);
+  // If the input is not a valid number, give an alert to the user
   if (addNumberInput <= 0) {
     alert('Please enter a valid number');
     return;
   }
+
+  // If the input is a valid number, add the book to the cart
   alert('You have added ' + addNumberInput + ' books to the cart');
   document.getElementById('addNumber').style.display = 'none';
   document.getElementById('addToCartButton').style.display = 'block';
   resetAllCheckbox();
 
+  // Update the cart count number
   document.getElementById('cartCountNumber').innerHTML = parseInt(document.getElementById('cartCountNumber').innerHTML) + parseInt(addNumberInput);
   document.getElementById('addNumberInput').value = 1;
 }
@@ -169,12 +208,14 @@ function addNumberCancel() {
   document.getElementById('addToCartButton').style.display = 'block';
 }
 
+// Add event listener to the reset cart button
 function resetCart() {
   if (window.confirm('Are you sure you want to reset the cart?')) {
-    // cart.innerHTML = '';
+    document.getElementById('cartCountNumber').innerHTML = 0;
   };
 }
 
+// Once a checkbox is checked, reset all other checkboxes
 function resetAllCheckbox() {
   const allCheckboxes = document.querySelectorAll('.checkbox');
   allCheckboxes.forEach(c => {
@@ -184,10 +225,8 @@ function resetAllCheckbox() {
   selectedBook = null;
 }
 
+// Add event listener to the dark mode button
 function darkMode() {
-  if (isDarkMode) {
-    return;
-  }
   isDarkMode = true;
   document.body.style.backgroundColor = 'black';
   document.body.style.color = 'white';
@@ -205,13 +244,10 @@ function darkMode() {
   const lightModeButton = document.getElementById("lightModeButton");
   darkModeButton.style.display = 'none';
   lightModeButton.style.display = 'flex';
-
 }
 
+// Add event listener to the light mode button
 function lightMode() {
-  if (!isDarkMode) {
-    return;
-  }
   isDarkMode = false;
   document.body.style.backgroundColor = '#f0fefd';
   document.body.style.color = 'black';
@@ -224,10 +260,6 @@ function lightMode() {
   allStars.forEach(s => {
     s.style.backgroundColor = '#3accc0';
   });
-  // const allButtons = document.querySelectorAll("button");
-  // allButtons.forEach(s => {
-  //   s.style.color = 'white';
-  // });
 
   const darkModeButton = document.getElementById("darkModeButton");
   const lightModeButton = document.getElementById("lightModeButton");
